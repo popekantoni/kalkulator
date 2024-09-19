@@ -1,3 +1,4 @@
+E1 <br>
 CEL <br>
 Aplikacja kalkulator ma służyć do obliczania działań, które poda użytkownik.
 
