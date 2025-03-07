@@ -1,17 +1,31 @@
 function appendToDisplay(value) {
-    const display = document.getElementById('ekran');
-    display.value = display.value === '0' ? value : display.value + value;
-  }
-  
-  function clearDisplay() {
-    document.getElementById('ekran').value = '0';
-  }
-  
-  function calculateResult() {
-    const display = document.getElementById('ekran');
-    try {
+  const display = document.getElementById('ekran');
+  display.value = display.value === '0' ? value : display.value + value;
+}
+
+function clearDisplay() {
+  document.getElementById('ekran').value = '0';
+}
+
+function calculateResult() {
+  const display = document.getElementById('ekran');
+  try {
       display.value = eval(display.value);
-    } catch (error) {
+  } catch (error) {
       display.value = 'Błąd';
-    }
   }
+}
+
+function calculateSquareRoot() {
+  const display = document.getElementById('ekran');
+  try {
+      let value = parseFloat(display.value);
+      if (value < 0) {
+          display.value = 'Błąd';
+      } else {
+          display.value = Math.sqrt(value);
+      }
+  } catch (error) {
+      display.value = 'Błąd';
+  }
+}

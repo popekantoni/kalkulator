@@ -12,41 +12,49 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: lightgray;
             margin: 0;
         }
 
         #kalkulator {
             background-color: #222222;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-            width: 350px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 15px 40px rgba(0, 0, 0, 1);
+            width: 457px;
+        }
+
+        #tekst{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align:center;
+            font-size: 18px;
+            color: #757575;
         }
 
         #ekran {
-            width: 100%;
-            height: 60px;
+            width: 92%;
+            height: 80px;
             background-color: #333;
-            color: #666;
+            color:#757575;
             text-align: right;
-            font-size: 40px;
+            font-size: 50px;
             border: none;
-            border-radius: 10px;
-            padding: 8px 0px;
-            margin-bottom: 20px;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 25px;
         }
 
         button {
-            width: 70px;
-            height: 70px;
-            font-size: 30px;
+            width: 80px;
+            height: 80px;
+            font-size: 35px;
             background-color: #555555;
             border: none;
-            border-radius: 10px;
-            margin: 5px;
+            border-radius: 15px;
+            margin: 15px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.1s;
         }
 
         button:hover {
@@ -55,10 +63,11 @@
 
         button:active {
             background-color: #AAAAAA;
+            transform: scale(0.95);
         }
 
         #wyczysc {
-            background-color: #ff6666;
+            background-color: red;
             color: #fff;
         }
 
@@ -79,29 +88,36 @@
 </head>
 <body>
 
-<div id="kalkulator">                                                   <!--- ciało kalkulatora, w którym dzieje się wszystko co ma się dziać-->
-    <input type="text" id="ekran" disabled placeholder="0">             <!--- wyświetlacz wyniku, czyli ekranik na którym wszystko się pokaże-->
-    <br>                                                                <!--- oddzielenie guzikow od siebie o jedna linijke numer 1-->
-    <button id="wyczysc" onclick="clearDisplay()">C</button>            <!--- guzik wyczyszczenia, czyli jak cos popsujesz to juz tego nie będzie-->
-    <button onclick="appendToDisplay('1')">1</button>                   <!--- guzik jedynki, czyli po kliknięciu pokaże się jeden-->
-    <button onclick="appendToDisplay('2')">2</button>                   <!--- guzik dwójki, czyli po kliknięciu pokaże się dwa-->
-    <button onclick="appendToDisplay('3')">3</button>                   <!--- guzik trójki, czyli po kliknięciu pokaże się trzy-->
-    <br>                                                                <!--- oddzielenie guzikow od siebie o jedna linijke numer 2-->
-    <button id="dzialania" onclick="appendToDisplay('+')">+</button>    <!--- guzik dodawania, czyli po wciśnięciu będzie dodawać liczby-->
-    <button onclick="appendToDisplay('4')">4</button>                   <!--- guzik czwórki, czyli po kliknięciu pokaże się cztery-->
-    <button onclick="appendToDisplay('5')">5</button>                   <!--- guzik piątki, czyli po kliknięciu pokaże się pięć-->
-    <button onclick="appendToDisplay('6')">6</button>                   <!--- guzik szóstki, czyli po kliknięciu pokaże się sześć-->
-    <br>                                                                <!--- oddzielenie guzikow od siebie o jedna linijke numer 3-->
-    <button id="dzialania" onclick="appendToDisplay('-')">-</button>    <!--- guzik odejmowania, czyli po wciśnięciu odejmie od jednej liczby drugą-->
-    <button onclick="appendToDisplay('7')">7</button>                   <!--- guzik siódemki, czyli po kliknięciu pokaże się siedem-->
-    <button onclick="appendToDisplay('8')">8</button>                   <!--- guzik ósemki, czyli po kliknięciu pokaże się osiem-->
-    <button onclick="appendToDisplay('9')">9</button>                   <!--- guzik dziewiątki, czyli po kliknięciu pokaże się dziewięć-->
-    <br>                                                                <!--- oddzielenie guzikow od siebie o jedna linijke numer 4-->
-    <button id="dzialania" onclick="appendToDisplay('*')">*</button>    <!--- guzik mnożenia, czyli po wciśnięciu pomnoży pierwszą liczbę przez drugą-->
-    <button onclick="appendToDisplay('0')">0</button>                   <!--- guzik zerowania, czyli po kliknięciu pokaże się zero-->
-    <button id="dzialania" onclick="appendToDisplay('/')">/</button>    <!--- guzik dzielenia, czyli po wciśnięciu podzieli pierwszą liczbę przez drugą, ale jak druga liczba będzie 0 to nie zadziała i pokaże błąd-->
-    <button id="dzialania" onclick="appendToDisplay('**')">^</button>   <!--- guzik potęgowania, czyli po wciśnięciu pomnoży pierwszą liczbę przez samą siebie tyle razy, jaki będzie miała cała liczba druga-->
-    <button id="rownosc" onclick="calculateResult()">=</button>         <!--- guzik wyniku, czyli po wciśnięciu poda wynik całego podanego działania-->
+<div id="kalkulator"> 
+    <div id="tekst">Popek-alkulator</div>                                                   
+    <input type="text" id="ekran" disabled placeholder="0">             
+    <br>                                                                
+    <button id="wyczysc" onclick="clearDisplay()">C</button>            
+    <button onclick="appendToDisplay('1')">1</button>                   
+    <button onclick="appendToDisplay('2')">2</button>                   
+    <button onclick="appendToDisplay('3')">3</button>                   
+    <br>                                                                
+    <button id="dzialania" onclick="appendToDisplay('+')">+</button>    
+    <button onclick="appendToDisplay('4')">4</button>                   
+    <button onclick="appendToDisplay('5')">5</button>                   
+    <button onclick="appendToDisplay('6')">6</button>                   
+    <br>                                                                
+    <button id="dzialania" onclick="appendToDisplay('-')">-</button>    
+    <button onclick="appendToDisplay('7')">7</button>                   
+    <button onclick="appendToDisplay('8')">8</button>                   
+    <button onclick="appendToDisplay('9')">9</button>                   
+    <br>                                                                
+    <button id="dzialania" onclick="appendToDisplay('*')">*</button>    
+    <button onclick="appendToDisplay('0')">0</button>                   
+    <button id="dzialania" onclick="appendToDisplay('/')">/</button>    
+    <button id="dzialania" onclick="appendToDisplay('**')">^</button>   
+    <button id="rownosc" onclick="calculateResult()">=</button>         
+    <button id="dzialania" onclick="calculateSquareRoot()">√</button>    
 </div>
+
+<footer>
+    <div id="cpright"></div>
+</footer>
+
 </body>
 </html>
