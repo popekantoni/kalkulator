@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,36 @@
             margin: 0;
         }
 
+        #toggleModalBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            font-size: 30px;
+            font-family: 'Comic sans';
+            background-color: #4476ff;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #kawa {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 15px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
         #kalkulator {
             background-color: #222222;
             padding: 40px;
@@ -24,23 +55,24 @@
             width: 457px;
         }
 
-        #tekst{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align:center;
+        #tekst {
+            text-align: center;
             font-size: 18px;
             color: #757575;
+            padding-bottom: 10px;
         }
 
         #ekran {
-            width: 92%;
+            width: 90%;
             height: 80px;
             background-color: #333;
-            color:#757575;
+            color: #757575;
             text-align: right;
             font-size: 50px;
             border: none;
             border-radius: 15px;
             padding: 10px;
+            margin-left: 13px;
             margin-bottom: 25px;
         }
 
@@ -81,43 +113,99 @@
             color: #fff;
         }
 
-        button#wyczysc:hover, button#rownosc:hover, button#dzialania:hover {
+        button#wyczysc:hover,
+        button#rownosc:hover,
+        button#dzialania:hover {
             opacity: 0.9;
+        }
+
+        .okienko {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .okienkoTekst {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .okienkoTekst p {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .okienkoPapa {
+            cursor: pointer;
+            text-align: center;
+            background-color: red;
+            color: white;
+            width: 200px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
         }
     </style>
 </head>
+
 <body>
 
-<div id="kalkulator"> 
-    <div id="tekst">Popek-alkulator</div>                                                   
-    <input type="text" id="ekran" disabled placeholder="0">             
-    <br>                                                                
-    <button id="wyczysc" onclick="clearDisplay()">C</button>            
-    <button onclick="appendToDisplay('1')">1</button>                   
-    <button onclick="appendToDisplay('2')">2</button>                   
-    <button onclick="appendToDisplay('3')">3</button>                   
-    <br>                                                                
-    <button id="dzialania" onclick="appendToDisplay('+')">+</button>    
-    <button onclick="appendToDisplay('4')">4</button>                   
-    <button onclick="appendToDisplay('5')">5</button>                   
-    <button onclick="appendToDisplay('6')">6</button>                   
-    <br>                                                                
-    <button id="dzialania" onclick="appendToDisplay('-')">-</button>    
-    <button onclick="appendToDisplay('7')">7</button>                   
-    <button onclick="appendToDisplay('8')">8</button>                   
-    <button onclick="appendToDisplay('9')">9</button>                   
-    <br>                                                                
-    <button id="dzialania" onclick="appendToDisplay('*')">*</button>    
-    <button onclick="appendToDisplay('0')">0</button>                   
-    <button id="dzialania" onclick="appendToDisplay('/')">/</button>    
-    <button id="dzialania" onclick="appendToDisplay('**')">^</button>   
-    <button id="rownosc" onclick="calculateResult()">=</button>         
-    <button id="dzialania" onclick="calculateSquareRoot()">√</button>    
-</div>
 
-<footer>
-    <div id="cpright"></div>
-</footer>
+    <button id="toggleModalBtn" onclick="otworzOkienko()">I</button>
+    <button id="kawa" onclick="openKawa()">Przycisk do robienia kawy</button>
 
+    <div id="Okienko" class="okienko">
+        <div class="okienkoTekst">
+            <p>Instrukcja obsługi:<br>
+                1. Przyciski można wpisywać na kalkulatorze lub na klawaiturze.<br>
+                2. Aby obliczyć pierwisatek, należy najpierw podać liczbę a potem kliknąć przycisk pierwiastka.<br>
+                3. Jeżeli liczba jest za długa na mointorze, strzałki mogą ruszać nim w prawo i lewo.<br>
+                4. Aby wyczyścić ekran, trzeba nacisnąć klawisz Escape.<br>
+                5. Aby pokazać wynik, trzeba nacisnąć klawisz Enter.
+            </p>
+            <button class="okienkoPapa" onclick="zamknijOkienko()">Zamknij</button>
+        </div>
+    </div>
+
+    <div id="kalkulator">
+        <div id="tekst">Popek-alkulator</div>
+        <input type="text" id="ekran" disabled placeholder="0">
+        <br>
+        <button id="wyczysc" onclick="wyczyscEkran()">C</button>
+        <button onclick="pokazNaEkranie('1')">1</button>
+        <button onclick="pokazNaEkranie('2')">2</button>
+        <button onclick="pokazNaEkranie('3')">3</button>
+        <br>
+        <button id="dzialania" onclick="pokazNaEkranie('+')">+</button>
+        <button onclick="pokazNaEkranie('4')">4</button>
+        <button onclick="pokazNaEkranie('5')">5</button>
+        <button onclick="pokazNaEkranie('6')">6</button>
+        <br>
+        <button id="dzialania" onclick="pokazNaEkranie('-')">-</button>
+        <button onclick="pokazNaEkranie('7')">7</button>
+        <button onclick="pokazNaEkranie('8')">8</button>
+        <button onclick="pokazNaEkranie('9')">9</button>
+        <br>
+        <button id="dzialania" onclick="pokazNaEkranie('*')">*</button>
+        <button id="dzialania" onclick="pokazNaEkranie('.')">.</button>
+        <button id="dzialania" onclick="pokazNaEkranie('/')">/</button>
+        <button onclick="pokazNaEkranie('0')">0</button>
+        <br>
+        <button id="dzialania" onclick="pokazNaEkranie('**')">^</button>
+        <button id="dzialania" onclick="obliczPierwiastek()">√</button>
+        <button id="rownosc" onclick="oblicz()">=</button>
+        
+    </div>
 </body>
+
 </html>
